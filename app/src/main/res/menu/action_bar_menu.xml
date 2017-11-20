@@ -3,6 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/instructions_item"
+        android:title="@string/instructions_game"
+
+        />
+    <item
+        android:id="@+id/begin_game"
+        android:title="@string/begin_game"
+        />
+    <item
+        android:id="@+id/configuration_game"
+        android:title="@string/configuration_game"
+
+        >
+        <menu >
+            <item android:title="Nivel Principiante" />
+            <item android:title="Nivel Ameteur" />
+            <item android:title="Nivel Avanzado" />
+        </menu>
+    </item>
+    <item
         android:id="@+id/add_item"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add Item"

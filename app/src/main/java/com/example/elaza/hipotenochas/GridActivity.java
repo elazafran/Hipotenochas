@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +20,8 @@ public class GridActivity extends AppCompatActivity {
     // lo sacamos fuera para poder utilizarlo
     private MyAdapter myAdapter;
     private int counter = 0;
+    private MenuItem itemClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,10 @@ public class GridActivity extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.gridView);
         //Datos a mostrar
         names = new ArrayList<String>();
-        names.add("0");
+        for (int i =0;i<64;i++){
+            names.add("btn"+i);
+        }
+        /*
         names.add("1");
         names.add("2");
         names.add("3");
@@ -45,7 +49,7 @@ public class GridActivity extends AppCompatActivity {
         names.add("13");
         names.add("14");
         names.add("15");
-
+        */
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,7 +66,10 @@ public class GridActivity extends AppCompatActivity {
         registerForContextMenu(gridView);
     }
 
-    //este es para crear el menu, inflamos el layout del menu opciones
+    /**
+     *este es para crear el menu, inflamos el layout del menu opciones
+     */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -70,7 +77,9 @@ public class GridActivity extends AppCompatActivity {
         return true;
     }
 
-    //este es para recoger los eventos del menu, manejamos los eventos
+    /**
+     * este es para recoger los eventos del menu, manejamos los eventos
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -121,12 +130,22 @@ public class GridActivity extends AppCompatActivity {
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         //los realizamos en switch por si crece la app
         switch (item.getItemId()){
             case R.id.delete_item:
                 //borramos el item que hemos hecho click
                 this.names.remove(info.position);
+
+                // y notificamos los cambios
+                this.myAdapter.notifyDataSetChanged();
+
+                return true;
+            case R.id.check_item:
+                //cambiamos la imagen del item en el que hemos hecho click
+                this.names.set(info.position,"cambiado");
+
 
                 // y notificamos los cambios
                 this.myAdapter.notifyDataSetChanged();

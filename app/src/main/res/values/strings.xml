@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">Seccion02</string>
+    <string name="app_name">Hipotenochas</string>
     <string name="description_image">imagen de hipotenochas</string>
+    <string name="find_hipotenocha">He encontrado una hipotenocha</string>
+    <string name="instructions_game">Instrucciones</string>
+    <string name="begin_game">Comenzar juego!</string>
+    <string name="configuration_game">Configura el juego</string>
 </resources>

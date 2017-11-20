@@ -97,7 +97,7 @@ public class MyAdapter extends BaseAdapter {
         // TextView textView = (TextView) v.findViewById(R.id.textView);
         //ahora le cargamos el texto que tenemos en el textView
         //textView.setText(currentName);
-        holder.nameTextView.setText(currentName);
+       // holder.nameTextView.setText(currentName);
         return convertView;
     }
 
