@@ -4,30 +4,35 @@
 
     <item
         android:id="@+id/instructions_item"
-        android:title="@string/instructions_game"
+        android:orderInCategory="1"
+        android:title="@string/instrucciones"
+        app:showAsAction="never"
+        android:onClick="showInstrucciones"
 
         />
     <item
         android:id="@+id/begin_game"
         android:title="@string/begin_game"
+        android:orderInCategory="2"
         />
     <item
         android:id="@+id/configuration_game"
         android:title="@string/configuration_game"
-
+        android:orderInCategory="3"
         >
-        <menu >
+        <menu>
             <item android:title="Nivel Principiante" />
             <item android:title="Nivel Ameteur" />
             <item android:title="Nivel Avanzado" />
         </menu>
     </item>
-    <item
-        android:id="@+id/add_item"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Add Item"
-        app:showAsAction="ifRoom"
 
-        />
+    <item
+        android:id="@+id/selec_personaje"
+        android:orderInCategory="5"
+        android:title="@string/selecciona_personaje"
+        android:icon="@drawable/ic_launcher_background"
+        app:showAsAction="always"
+        android:onClick="showSeleccionPersonaje" />
 
 </menu>

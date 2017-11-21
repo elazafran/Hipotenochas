@@ -5,4 +5,15 @@
     <string name="instructions_game">Instrucciones</string>
     <string name="begin_game">Comenzar juego!</string>
     <string name="configuration_game">Configura el juego</string>
+    <string name="instrucciones">Instrucciones</string>
+    <string name="titulo_instrucciones">Instrucciones</string>
+    <string name="texto_instrucciones">El juego es tipo buscaminas: Cuando pulsas en una casilla,
+    sale un número que identifica cuantas hipotenochas hay alrededor: Ten cuidado porque si pulsas
+    en una casilla que tenga una hipotenocha escondida, perderás. Si crees o tienes la certeza de
+    que hay una hipotenocha, haz un clic largo sobre la casilla para señalarla. No hagas un clic
+    largo en una casilla donde no hay una hipotenocha porque perderás. Ganas una vez hayas
+    encontrado todas las hipotenochas.</string>
+    <string name="ok">ok</string>
+    <string name="selecciona_pers">Selecciona personaje</string>
+    <string name="selecciona_personaje">Selecciona personaje</string>
 </resources>

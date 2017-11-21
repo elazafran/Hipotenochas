@@ -1,5 +1,7 @@
 package com.example.elaza.hipotenochas;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -14,13 +16,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridActivity extends AppCompatActivity {
+public class GridActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje{
     private GridView gridView;
     private List<String> names;
     // lo sacamos fuera para poder utilizarlo
     private MyAdapter myAdapter;
     private int counter = 0;
     private MenuItem itemClick;
+    private int personaje = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +88,17 @@ public class GridActivity extends AppCompatActivity {
 
         //creamos un switch de cara al futuro
         switch (item.getItemId()){
-            case R.id.add_item:
+            // case R.id.add_item:
                 //utilizamos el preincremento para sumarle uno antes de imprimirlo
-                this.names.add("Added number" + (++counter));
+              //  this.names.add("Added number" + (++counter));
                 //tenemos que aviar al adaptador que hemos incrementado en uno
                 // y avisamos al adaptador porque tiene el metodo getView pq es donde llegaban
                 //nuestra posiciones para uqe las renderice
 
                 //notificamos al adaptador del cambio producido
-                this.myAdapter.notifyDataSetChanged();
+                // this.myAdapter.notifyDataSetChanged();
 
-                return true;
+                // return true;
             default:
                 return true;
         }
@@ -156,5 +159,38 @@ public class GridActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    /**
+     * Muestra el cuadro de diálogo para la selección del personaje.
+     *
+     * @param item Elemento del menú asociado al método.
+     */
+    public void showSeleccionPersonaje(MenuItem item) {
+        SelecPersonajeDialogFragment selecPersonaje = new SelecPersonajeDialogFragment();
+        selecPersonaje.show(getFragmentManager(), null);
+    }
+
+    public void showInstrucciones(MenuItem item) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.texto_instrucciones)
+                .setTitle(R.string.titulo_instrucciones)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // El usuario pulsa OK.
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+
+    @Override
+    public void onPersonajeSeleccionado(int i) {
+        personaje = i;
     }
 }
