@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nombres">
+        <item>personaje 1</item>
+        <item>personaje 2</item>
+        <item>personaje 3</item>
+    </string-array>
+
+    <integer-array name="imagenes">
+        <item>@drawable/ic_launcher_background</item>
+        <item>@drawable/ic_launcher_background</item>
+        <item>@drawable/ic_launcher_background</item>
+    </integer-array>
+</resources>
