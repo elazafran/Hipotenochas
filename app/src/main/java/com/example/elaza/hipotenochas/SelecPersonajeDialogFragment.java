@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by elaza on 21/11/2017.
@@ -34,12 +35,15 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View miDialogo = inflater.inflate(R.layout.select_personaje_spinner, null);
-
+        
+        final Context contextPrueba = builder.getContext();
         builder.setView(miDialogo)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // OK
+
+
                     }
                 });
 
@@ -52,7 +56,9 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
 
         return builder.create();
     }
-
+    public void mensaje(Context context){
+        Toast.makeText(context,"holaa",Toast.LENGTH_LONG).show();
+    }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         respSeleccPersonaje.onPersonajeSeleccionado(i);
