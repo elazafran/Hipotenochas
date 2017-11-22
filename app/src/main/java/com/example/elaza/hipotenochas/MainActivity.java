@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje{
+public class MainActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje{
     private GridView gridView;
     private List<String> names;
     // lo sacamos fuera para poder utilizarlo
@@ -30,6 +31,7 @@ public class GridActivity extends AppCompatActivity implements SelecPersonajeDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
 
+        GameEngine.getInstance().createGrid(this);
         gridView = (GridView) findViewById(R.id.gridView);
         //Datos a mostrar
         names = new ArrayList<String>();
@@ -57,7 +59,7 @@ public class GridActivity extends AppCompatActivity implements SelecPersonajeDia
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GridActivity.this,"Clicked: " + names.get(position) ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Clicked: " + names.get(position) ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,16 +115,19 @@ public class GridActivity extends AppCompatActivity implements SelecPersonajeDia
      */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
 
+        super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        //cogemos el menu cqeu nos entra y lo casteamos
+
+        //cogemos el menu que nos entra y lo casteamos
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(this.names.get(info.position));
+        View changeBg = v;
+        //TODO
+        changeBg.getContext().getResources().getDrawable(R.drawable.ic_sheldom_background);
+
+
         inflater.inflate(R.menu.context_menu,menu);
-
-
-
 
     }
 
@@ -135,6 +140,7 @@ public class GridActivity extends AppCompatActivity implements SelecPersonajeDia
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
         //los realizamos en switch por si crece la app
         switch (item.getItemId()){
             case R.id.delete_item:
@@ -147,6 +153,8 @@ public class GridActivity extends AppCompatActivity implements SelecPersonajeDia
                 return true;
             case R.id.check_item:
                 //cambiamos la imagen del item en el que hemos hecho click
+                //TODO que cambie la imagen
+
                 this.names.set(info.position,"cambiado");
 
 

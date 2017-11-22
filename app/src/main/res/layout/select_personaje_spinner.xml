@@ -10,11 +10,15 @@
             android:id="@+id/textView"
             android:textSize="24sp"
             android:textStyle="normal|bold"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+
+            />
 
         <Spinner
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="40dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/spinner" />
 
 </android.support.constraint.ConstraintLayout>

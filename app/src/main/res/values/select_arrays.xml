@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="nombres">
-        <item>personaje 1</item>
-        <item>personaje 2</item>
-        <item>personaje 3</item>
+        <item>Howard</item>
+        <item>Penny</item>
+        <item>Rajesh</item>
+        <item>Leonard</item>
     </string-array>
 
     <integer-array name="imagenes">
-        <item>@drawable/ic_launcher_background</item>
-        <item>@drawable/ic_launcher_background</item>
-        <item>@drawable/ic_launcher_background</item>
+        <item>@mipmap/ic_howard_foreground</item>
+        <item>@mipmap/ic_penny_foreground</item>
+        <item>@mipmap/ic_rajesh_foreground</item>
+        <item>@mipmap/ic_leonard_foreground</item>
     </integer-array>
 </resources>

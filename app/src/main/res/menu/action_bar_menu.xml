@@ -31,8 +31,10 @@
         android:id="@+id/selec_personaje"
         android:orderInCategory="5"
         android:title="@string/selecciona_personaje"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@mipmap/ic_launcher_foreground"
         app:showAsAction="always"
-        android:onClick="showSeleccionPersonaje" />
+        android:onClick="showSeleccionPersonaje"
+        
+        />
 
 </menu>

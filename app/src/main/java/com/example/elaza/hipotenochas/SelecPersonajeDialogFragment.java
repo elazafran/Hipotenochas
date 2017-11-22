@@ -25,8 +25,10 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
     // Declaración de variables
     RespSeleccPersonaje respSeleccPersonaje;
 
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
