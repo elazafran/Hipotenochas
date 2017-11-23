@@ -6,8 +6,10 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import android.widget.Toast;
  */
 
 
-public class SelecPersonajeDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
+public class SelecPersonajeDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener{
     // Declaración de variables
     RespSeleccPersonaje respSeleccPersonaje;
 
@@ -39,9 +41,11 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
         final Context contextPrueba = builder.getContext();
         builder.setView(miDialogo)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // OK
+                        mensaje();
 
 
                     }
@@ -56,8 +60,11 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
 
         return builder.create();
     }
-    public void mensaje(Context context){
-        Toast.makeText(context,"holaa",Toast.LENGTH_LONG).show();
+    //TODO lanzar mensaje desde el mensaje de diálogo
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void mensaje(){
+        Context context2 =this.getContext();
+        Toast.makeText(context2 ,"cambiamos de personaje",Toast.LENGTH_LONG).show();
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -66,8 +73,9 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        getShowsDialog();
     }
+
 
     /**
      * Adaptador para generar un elemento personalizado para el spinner de selección de personaje.
