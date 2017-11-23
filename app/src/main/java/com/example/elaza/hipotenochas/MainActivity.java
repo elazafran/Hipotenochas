@@ -2,8 +2,10 @@ package com.example.elaza.hipotenochas;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -12,12 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje{
+public class MainActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje {
     private GridView gridView;
     private List<String> names;
     // lo sacamos fuera para poder utilizarlo
@@ -26,17 +29,65 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
     private MenuItem itemClick;
     private int personaje = 0;
 
+    /*
+     contador properties
+     */
+
+    CountDownTimer mCountDownTimer;
+    long mInitialTime = DateUtils.MINUTE_IN_MILLIS * 3 + DateUtils.SECOND_IN_MILLIS * 42;
+    TextView mTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid);
+        setContentView(R.layout.activity_grid_8);
+    /*
+    *
+    * contador
+    *
+    * */
 
+        mTextView = (TextView) findViewById(R.id.textViewCounter);
+
+        mCountDownTimer = new CountDownTimer(mInitialTime, 1000) {
+            StringBuilder time = new StringBuilder();
+
+            @Override
+            public void onFinish() {
+                mTextView.setText(DateUtils.formatElapsedTime(0));
+                //mTextView.setText("Times Up!");
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                time.setLength(0);
+                // Use days if appropriate
+                if (millisUntilFinished > DateUtils.DAY_IN_MILLIS) {
+                    long count = millisUntilFinished / DateUtils.DAY_IN_MILLIS;
+                    if (count > 1)
+                        time.append(count).append(" days ");
+                    else
+                        time.append(count).append(" day ");
+
+                    millisUntilFinished %= DateUtils.DAY_IN_MILLIS;
+                }
+
+                time.append(DateUtils.formatElapsedTime(Math.round(millisUntilFinished / 1000d)));
+                mTextView.setText(time.toString());
+            }
+        };
+
+
+    /*
+     * final contador
+     *
+     */
         GameEngine.getInstance().createGrid(this);
         gridView = (GridView) findViewById(R.id.gridView);
         //Datos a mostrar
         names = new ArrayList<String>();
-        for (int i =0;i<64;i++){
-            names.add("btn"+i);
+        for (int i = 0; i < 64; i++) {
+            names.add("btn" + i);
         }
         /*
         names.add("1");
@@ -59,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,"Clicked: " + names.get(position) ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Clicked: " + names.get(position), Toast.LENGTH_SHORT).show();
             }
         });
 
         //enlazamos con nuestro adaptador personalizado
-        myAdapter = new MyAdapter(this,R.layout.grid_item,names);
+        myAdapter = new MyAdapter(this, R.layout.grid_item, names);
         gridView.setAdapter(myAdapter);
 
         //aqui indicamos cuando queremos que se lance el Context Menu
@@ -72,13 +123,13 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
     }
 
     /**
-     *este es para crear el menu, inflamos el layout del menu opciones
+     * este es para crear el menu, inflamos el layout del menu opciones
      */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_bar_menu,menu);
+        inflater.inflate(R.menu.action_bar_menu, menu);
         return true;
     }
 
@@ -89,18 +140,18 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
     public boolean onOptionsItemSelected(MenuItem item) {
 
         //creamos un switch de cara al futuro
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             // case R.id.add_item:
-                //utilizamos el preincremento para sumarle uno antes de imprimirlo
-              //  this.names.add("Added number" + (++counter));
-                //tenemos que aviar al adaptador que hemos incrementado en uno
-                // y avisamos al adaptador porque tiene el metodo getView pq es donde llegaban
-                //nuestra posiciones para uqe las renderice
+            //utilizamos el preincremento para sumarle uno antes de imprimirlo
+            //  this.names.add("Added number" + (++counter));
+            //tenemos que aviar al adaptador que hemos incrementado en uno
+            // y avisamos al adaptador porque tiene el metodo getView pq es donde llegaban
+            //nuestra posiciones para uqe las renderice
 
-                //notificamos al adaptador del cambio producido
-                // this.myAdapter.notifyDataSetChanged();
+            //notificamos al adaptador del cambio producido
+            // this.myAdapter.notifyDataSetChanged();
 
-                // return true;
+            // return true;
             default:
                 return true;
         }
@@ -109,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
 
     /**
      * inflamos la vista que no vemos pero está ahí
+     *
      * @param menu
      * @param v
      * @param menuInfo
@@ -127,12 +179,13 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
         changeBg.getContext().getResources().getDrawable(R.drawable.ic_sheldom_background);
 
 
-        inflater.inflate(R.menu.context_menu,menu);
+        inflater.inflate(R.menu.context_menu, menu);
 
     }
 
     /**
-     *  Manejamos los eventos click en el context menu
+     * Manejamos los eventos click en el context menu
+     *
      * @param item
      * @return
      */
@@ -142,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         //los realizamos en switch por si crece la app
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.delete_item:
                 //borramos el item que hemos hecho click
                 this.names.remove(info.position);
@@ -155,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
                 //cambiamos la imagen del item en el que hemos hecho click
                 //TODO que cambie la imagen
 
-                this.names.set(info.position,"cambiado");
+                this.names.set(info.position, "cambiado");
 
 
                 // y notificamos los cambios
@@ -163,10 +216,17 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
 
                 return true;
             default:
-                return  super.onContextItemSelected(item);
+                return super.onContextItemSelected(item);
 
         }
 
+    }
+
+    /**
+     *
+     */
+    public void startGame(MenuItem item) {
+        mCountDownTimer.start();
     }
 
     /**
@@ -194,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 
     @Override

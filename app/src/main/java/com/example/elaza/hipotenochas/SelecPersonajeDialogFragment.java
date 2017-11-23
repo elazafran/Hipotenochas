@@ -35,7 +35,7 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View miDialogo = inflater.inflate(R.layout.select_personaje_spinner, null);
-        
+
         final Context contextPrueba = builder.getContext();
         builder.setView(miDialogo)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

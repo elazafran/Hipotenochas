@@ -14,6 +14,7 @@
         android:id="@+id/begin_game"
         android:title="@string/begin_game"
         android:orderInCategory="2"
+        android:onClick="startGame"
         />
     <item
         android:id="@+id/configuration_game"
