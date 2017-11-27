@@ -1,8 +1,10 @@
 package com.example.elaza.hipotenochas;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -65,6 +68,7 @@ public class SelecPersonajeDialogFragment extends DialogFragment implements Adap
     public void mensaje(){
         Context context2 =this.getContext();
         Toast.makeText(context2 ,"cambiamos de personaje",Toast.LENGTH_LONG).show();
+
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

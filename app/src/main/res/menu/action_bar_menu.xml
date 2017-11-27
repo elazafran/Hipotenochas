@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
 
     <item
         android:id="@+id/instructions_item"
@@ -23,7 +25,9 @@
         >
         <menu>
             <item android:title="Nivel Principiante" />
-            <item android:title="Nivel Ameteur" />
+            <item android:title="Nivel Ameteur"
+                android:id="@+id/amateur"
+                />
             <item android:title="Nivel Avanzado" />
         </menu>
     </item>

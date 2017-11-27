@@ -2,6 +2,7 @@ package com.example.elaza.hipotenochas;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SelecPersonajeDialogFragment.RespSeleccPersonaje {
+
     private GridView gridView;
     private List<String> names;
+
+
     // lo sacamos fuera para poder utilizarlo
     private MyAdapter myAdapter;
     private int counter = 0;
@@ -34,13 +40,18 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
      */
 
     CountDownTimer mCountDownTimer;
-    long mInitialTime = DateUtils.MINUTE_IN_MILLIS * 3 + DateUtils.SECOND_IN_MILLIS * 42;
+    long mInitialTime = DateUtils.MINUTE_IN_MILLIS * 3 + DateUtils.SECOND_IN_MILLIS * 0;
     TextView mTextView;
 
+
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        bundle = savedInstanceState;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid_8);
+        setContentView(R.layout.activity_grid_10);
+
+
     /*
     *
     * contador
@@ -138,20 +149,23 @@ public class MainActivity extends AppCompatActivity implements SelecPersonajeDia
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //TODO cambiar rejilla y renderizar
         //creamos un switch de cara al futuro
         switch (item.getItemId()) {
-            // case R.id.add_item:
+            case R.id.amateur:
             //utilizamos el preincremento para sumarle uno antes de imprimirlo
             //  this.names.add("Added number" + (++counter));
             //tenemos que aviar al adaptador que hemos incrementado en uno
             // y avisamos al adaptador porque tiene el metodo getView pq es donde llegaban
             //nuestra posiciones para uqe las renderice
+                Intent amateur = new Intent(MainActivity.this,AmateurActivity.class);
+                startActivity(amateur);
 
+                Toast.makeText(getApplicationContext(),"ha seleccionado amater cambiaos rejilla",Toast.LENGTH_SHORT).show();
             //notificamos al adaptador del cambio producido
-            // this.myAdapter.notifyDataSetChanged();
+                // this.myAdapter.notifyDataSetChanged();
 
-            // return true;
+             return true;
             default:
                 return true;
         }
